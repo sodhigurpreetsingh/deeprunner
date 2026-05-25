@@ -33,11 +33,12 @@ env/
 *.swo
 *~
 
-# Environment variables
+# Environment variables (needed locally, don't commit)
 .env
 .env.local
+backend/.env
 
-# Docker volumes
+# Docker volumes (generated, don't commit)
 postgres_data/
 elasticsearch_data/
 redis_data/
@@ -47,9 +48,10 @@ rabbitmq_data/
 *.log
 logs/
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
+backend/.DS_Store
 
 # Test coverage
 htmlcov/
@@ -64,16 +66,5 @@ htmlcov/
 # Claude Code
 .claude/
 
-# Assessment files (keep locally, don't commit)
+# Reference documents (keep locally, don't commit to repo)
 Software Engineer interview questions.pdf
-README_SUBMISSION.txt
-SUBMISSION_SUMMARY.md
-TESTING_REPORT.md
-TEST_PLAN.md
-
-# Backend redundant files (keep locally, don't commit)
-backend/SERVER_GUIDE.md
-backend/main.py
-backend/start_backend.sh
-backend/.env
-backend/.DS_Store
