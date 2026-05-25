@@ -1,0 +1,344 @@
+{
+  "info": {
+    "name": "Document Search Service API",
+    "description": "Complete API collection for testing the Distributed Document Search Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "tenant_a",
+      "value": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "string"
+    },
+    {
+      "key": "tenant_b",
+      "value": "650e8400-e29b-41d4-a716-446655440001",
+      "type": "string"
+    },
+    {
+      "key": "document_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Document - Tech Article",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set(\"document_id\", jsonData.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Introduction to Distributed Systems\",\n  \"content\": \"Distributed systems are collections of independent computers that appear to users as a single coherent system. Key challenges include consistency, availability, and partition tolerance.\",\n  \"metadata\": {\n    \"author\": \"John Doe\",\n    \"category\": \"Technology\",\n    \"tags\": [\"distributed-systems\", \"architecture\"]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/documents",
+          "host": ["{{base_url}}"],
+          "path": ["documents"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Document - Machine Learning",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Machine Learning Fundamentals\",\n  \"content\": \"Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.\",\n  \"metadata\": {\n    \"author\": \"Jane Smith\",\n    \"category\": \"AI\",\n    \"tags\": [\"machine-learning\", \"ai\"]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/documents",
+          "host": ["{{base_url}}"],
+          "path": ["documents"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Document - Cloud Computing",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Cloud Computing Essentials\",\n  \"content\": \"Cloud computing provides on-demand access to computing resources including servers, storage, databases, networking, and software over the internet.\",\n  \"metadata\": {\n    \"author\": \"Bob Johnson\",\n    \"category\": \"Infrastructure\",\n    \"tags\": [\"cloud\", \"aws\", \"azure\"]\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/documents",
+          "host": ["{{base_url}}"],
+          "path": ["documents"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Document by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/documents/{{document_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["documents", "{{document_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search - Simple Query",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/search?q=distributed",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "distributed"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search - Multi-word Query",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/search?q=machine learning",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "machine learning"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search - With Pagination",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/search?q=systems&page=1&size=10",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "systems"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search - Fuzzy Match (Typo)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/search?q=lerning",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "lerning",
+              "description": "Typo: should find 'learning'"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Document",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_a}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/documents/{{document_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["documents", "{{document_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Error - Missing Tenant Header",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/search?q=test",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "test"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Error - Invalid Tenant ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "invalid-uuid"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/search?q=test",
+          "host": ["{{base_url}}"],
+          "path": ["search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "test"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Multi-Tenancy - Tenant B Document",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{tenant_b}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Tenant B Private Document\",\n  \"content\": \"This document belongs to Tenant B and should not be visible to Tenant A.\",\n  \"metadata\": {\n    \"confidential\": true\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/documents",
+          "host": ["{{base_url}}"],
+          "path": ["documents"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
