@@ -70,3 +70,4 @@ htmlcov/
 Software Engineer interview questions.pdf
 EMAIL_SHORT_VERSION.txt
 EMAIL_RESPONSE.md
+.gitignore
