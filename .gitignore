@@ -22,6 +22,7 @@ wheels/
 
 # Virtual Environment
 venv/
+.venv/
 ENV/
 env/
 
@@ -62,3 +63,17 @@ htmlcov/
 
 # Claude Code
 .claude/
+
+# Assessment files (keep locally, don't commit)
+Software Engineer interview questions.pdf
+README_SUBMISSION.txt
+SUBMISSION_SUMMARY.md
+TESTING_REPORT.md
+TEST_PLAN.md
+
+# Backend redundant files (keep locally, don't commit)
+backend/SERVER_GUIDE.md
+backend/main.py
+backend/start_backend.sh
+backend/.env
+backend/.DS_Store
