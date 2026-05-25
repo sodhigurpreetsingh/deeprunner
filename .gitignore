@@ -68,3 +68,5 @@ htmlcov/
 
 # Reference documents (keep locally, don't commit to repo)
 Software Engineer interview questions.pdf
+EMAIL_SHORT_VERSION.txt
+EMAIL_RESPONSE.md
